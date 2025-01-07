@@ -1,0 +1,25 @@
+{
+  "name": "text-typing",
+  "version": "1.0.0",
+  "description": "生成AIで出力した文章でタイピング練習を行う",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --ext js,css,html server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2CDA1201/text-typing.git"
+  },
+  "author": "2CDA1201",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/2CDA1201/text-typing/issues"
+  },
+  "homepage": "https://github.com/2CDA1201/text-typing#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
