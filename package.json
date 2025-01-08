@@ -4,7 +4,8 @@
   "description": "生成AIで出力した文章でタイピング練習を行う",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ext js,css,html server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
