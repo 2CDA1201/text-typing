@@ -18,7 +18,16 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY); // APIキーを設定
 async function generate(count) {
     const model = genAI.getGenerativeModel({model : "gemini-1.5-flash-8b"}); // モデルを指定
     
-    const prompt = "Write a story about a magic backpack in Japanese."; // プロンプトを設定
+    const prompt = `Generate ${count} Japanese sentences, each between 10 to 30 characters.
+    Include diverse styles:
+
+    Daily life sentences,
+    Business/formal sentences,
+    Political/official texts,
+    Classical/literary expressions, and more.
+    Ensure variety and balance.
+    Sentences must be in Japanese only and separated by line breaks.
+    `; // プロンプトを設定
 
     console.log("Generating content...");
     
