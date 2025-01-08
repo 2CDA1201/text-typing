@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/2CDA1201/text-typing#readme",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
