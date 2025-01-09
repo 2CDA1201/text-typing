@@ -16,17 +16,9 @@ const MIME_TYPE = {
 const genAI = new GoogleGenerativeAI(process.env.API_KEY); // APIキーを設定してインスタンス化
 
 async function generate(count) {
-    const model = genAI.getGenerativeModel({model : "gemini-2.0-flash-exp"}); // モデルを指定
+    const model = genAI.getGenerativeModel({model : "gemini-1.5-flash"}); // モデルを指定
     
-    const prompt = `Generate ${count} Japanese sentences.
-    Include diverse styles:
-
-    Daily life sentences,
-    Business/formal sentences,
-    Political/official texts,
-    Classical/literary expressions, and more.
-    Ensure variety and balance.
-    Sentences must be in Japanese only and separated by one line breaks.`; // プロンプトを設定
+    const prompt = `日本語の一つの文を${count}個生成せよ。日本語の文以外を出力した場合ペナルティがあります。生成する文は、多様な文体を交えること。生成した文と文の間には改行以外入れない事。`; // プロンプトを設定
 
     console.log("Generating content...");
     
