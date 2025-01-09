@@ -57,7 +57,6 @@ ready_btn.addEventListener("click", async () => {
     }, 3000);
     setTimeout(() => {
         wait_div.style.display = "none";
-        input_div.style.visibility = "visible";
         example_div.style.visibility = "visible";
     }, 4000);
     await loadNextExampleText();
