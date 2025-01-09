@@ -29,7 +29,7 @@ class Queue {
         if (this._queue.length === 0) {
             return null;
         }
-        return this.queue.shift();
+        return this._queue.shift();
     }
 }
 
