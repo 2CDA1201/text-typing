@@ -36,6 +36,7 @@ class Queue {
 // 定数
 const STOCK_NUM = 5;
 const ready_btn = document.getElementById("readyBtn");
+const preview_div = document.getElementById("previewDiv");
 const example_div = document.getElementById("exampleDiv");
 const input_div = document.getElementById("inputDiv");
 
@@ -61,7 +62,8 @@ ready_btn.addEventListener("click", async () => {
     }, 3000);
     setTimeout(() => {
         example_div.style.textAlign = "left";
-        loadNextExampleText();
+        loadNextExampleText(true);
+        preview_div.style.visibility = "visible";
     }, 4000);
 });
 
@@ -88,46 +90,56 @@ function assessTypingProgress() {
     if (is_composing) return; // IME入力が確定されていないときは処理を中断
 
     let match_length = 0;
+    let temp_text = example_div.innerText;
     for (; match_length < input_div.value.length; match_length++) {
-        if (input_div.value[match_length] == exampleText[match_length]) {
+        if (input_div.value[match_length] == temp_text[match_length]) {
             continue;
         } else {
             break;
         }
     }
-    if (match_length == exampleText.length) {
+    if (match_length == temp_text.length) {
         loadNextExampleText();
     } else {
-        example_div.children[0].textContent = exampleText.slice(0, match_length);
-        example_div.children[1].textContent = exampleText.slice(match_length, exampleText.length);
+        example_div.children[0].textContent = temp_text.slice(0, match_length);
+        example_div.children[1].textContent = temp_text.slice(match_length, temp_text.length);
     }
 };
 
 /**
  * 次の例文を読み込む
  */
-async function loadNextExampleText() {
-    do {
-        exampleText = example_queue.pop();
-        if (exampleText === null) {
-            await fetchExampleText();
-            exampleText = example_queue.pop();
-        }
-    } while (exampleText === ""); // 空文字列の場合はもう一度取り出す
-    input_div.value = "";
-    example_div.children[0].textContent = "";
-    example_div.children[1].textContent = exampleText;
-
+async function loadNextExampleText(is_first = false) {
+    if (example_queue.length <= 2) {
+        await fetchExampleText(2);
+    }
     if (example_queue.length < STOCK_NUM) {
         fetchExampleText();
+    }
+    input_div.value = "";
+
+    if (is_first) {
+        exampleText = example_queue.pop();
+        example_div.children[0].textContent = "";
+        example_div.children[1].textContent = exampleText;
+        exampleText = example_queue.pop();
+        preview_div.children[0].textContent = "";
+        preview_div.children[1].textContent = exampleText;
+    } else {
+        exampleText = example_queue.pop();
+        example_div.children[0].textContent = "";
+        example_div.children[1].textContent = preview_div.children[1].textContent;
+
+        preview_div.children[0].textContent = "";
+        preview_div.children[1].textContent = exampleText;
     }
 }
 
 /**
  * 例文を取得する
  */
-async function fetchExampleText() {
-    await fetch(`/application/generate?count=${STOCK_NUM}`)
+async function fetchExampleText(_count = null) {
+    await fetch(`/application/generate?count=${_count ? _count : STOCK_NUM}`)
         .then(response => response.text())
         .then(data => {
             let result = data;

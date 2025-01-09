@@ -30,6 +30,13 @@ textarea {
 .result {
     margin-top: 20px;
 }
+.fadein-text {
+    flex: 1;
+    text-align: left;
+    text-wrap: stable;
+    font-size: 24px;
+    color: #3d3d3d60;
+}
 .text {
     flex: 1;
     text-wrap: stable;
