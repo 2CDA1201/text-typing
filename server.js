@@ -16,9 +16,9 @@ const MIME_TYPE = {
 const genAI = new GoogleGenerativeAI(process.env.API_KEY); // APIキーを設定してインスタンス化
 
 async function generate(count) {
-    const model = genAI.getGenerativeModel({model : "gemini-1.5-flash-8b"}); // モデルを指定
+    const model = genAI.getGenerativeModel({model : "gemini-2.0-flash-exp"}); // モデルを指定
     
-    const prompt = `Generate ${count} Japanese sentences, each between 10 to 30 characters.
+    const prompt = `Generate ${count} Japanese sentences.
     Include diverse styles:
 
     Daily life sentences,
