@@ -7,6 +7,10 @@ body {
     margin: 0;
     background-color: #f5ecd5;
 }
+textarea {
+    resize: none;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -30,11 +34,11 @@ body {
     position-anchor: center;
     color: #3d3d3d;
 }
-#inputText {
-    width: 100%;
-    line-height: 5vw;
-    font-size: 2.4vw;
-}
 .entered {
     color: #578e7e;
+}
+
+#inputDiv {
+    width: 100%;
+    font-size: 2.4vw;
 }
