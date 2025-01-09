@@ -81,7 +81,7 @@ input_div.addEventListener('compositionend', () => {
 });
 
 // 例文を格納する変数
-let exampleText = "";
+let example_text = "";
 let example_queue = new Queue();
 /**
  * 入力された文字列と例文を比較し、入力状況を表示する
