@@ -1,3 +1,23 @@
+/**
+ * キューを実装するクラス
+ */
+class Queue {
+    constructor() {
+        this.queue = [];
+    }
+
+    push(element) {
+        this.queue.push(element);
+    }
+
+    pop() {
+        if (this.queue.length === 0) {
+            return null;
+        }
+        return this.queue.shift();
+    }
+}
+
 const STOCK_NUM = 5;
 let example_queue = [];
 let exampleText = "";
