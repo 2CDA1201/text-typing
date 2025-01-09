@@ -42,7 +42,7 @@ const input_div = document.getElementById("inputDiv");
 ready_btn.addEventListener("click", async () => {
     ready_btn.style.display = "none";
     wait_div.style.display = "block";
-    await getExampleText();
+    await fetchExampleText();
     
     wait_div.textContent = "3";
 
@@ -60,7 +60,7 @@ ready_btn.addEventListener("click", async () => {
         input_div.style.visibility = "visible";
         example_div.style.visibility = "visible";
     }, 4000);
-    await nextExample();
+    await loadNextExampleText();
 });
 
 let is_composing = false; // IME入力が確定されていないかどうかを示すフラグ
@@ -72,13 +72,13 @@ input_div.addEventListener('compositionstart', () => {
 // 変換セッションを終了
 input_div.addEventListener('compositionend', () => {
     is_composing = false;
-    evaluateInputText();
+    assessTypingProgress();
 });
 
 let exampleText = "";
 
-input_div.addEventListener("input", evaluateInputText);
-function evaluateInputText() {
+input_div.addEventListener("input", assessTypingProgress);
+function assessTypingProgress() {
     if (is_composing) return; // IME入力が確定されていないときは処理を中断
 
     let i = 0;
@@ -90,7 +90,7 @@ function evaluateInputText() {
         }
     }
     if (i == exampleText.length) {
-        nextExample();
+        loadNextExampleText();
     } else {
         example_div.children[0].textContent = exampleText.slice(0, i);
         example_div.children[1].textContent = exampleText.slice(i, exampleText.length);
@@ -114,12 +114,11 @@ async function loadNextExampleText() {
     example_div.children[1].textContent = exampleText;
 
     if (example_queue.length < STOCK_NUM) {
-        getExampleText();
+        fetchExampleText();
     }
 }
 
-
-async function getExampleText() {
+async function fetchExampleText() {
     await fetch(`/application/generate?count=${STOCK_NUM}`)
         .then(response => response.text())
         .then(data => {
