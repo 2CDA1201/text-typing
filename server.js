@@ -26,8 +26,7 @@ async function generate(count) {
     Political/official texts,
     Classical/literary expressions, and more.
     Ensure variety and balance.
-    Sentences must be in Japanese only and separated by line breaks.
-    `; // プロンプトを設定
+    Sentences must be in Japanese only and separated by one line breaks.`; // プロンプトを設定
 
     console.log("Generating content...");
     
