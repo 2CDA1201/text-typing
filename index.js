@@ -1,6 +1,6 @@
 const STOCK_NUM = 5;
 let example_queue = [];
-let exampleText = new String();
+let exampleText = "";
 const ready_btn = document.getElementById("readyBtn");
 const wait_div = document.getElementById("waitDiv");
 const example_div = document.getElementById("exampleDiv");
