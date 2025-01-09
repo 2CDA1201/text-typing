@@ -34,8 +34,6 @@ class Queue {
 }
 
 const STOCK_NUM = 5;
-let example_queue = [];
-let exampleText = "";
 const ready_btn = document.getElementById("readyBtn");
 const wait_div = document.getElementById("waitDiv");
 const example_div = document.getElementById("exampleDiv");
@@ -77,6 +75,7 @@ input_div.addEventListener('compositionend', () => {
     evaluateInputText();
 });
 
+let exampleText = "";
 
 input_div.addEventListener("input", evaluateInputText);
 function evaluateInputText() {
@@ -98,7 +97,11 @@ function evaluateInputText() {
     }
 };
 
-async function nextExample() {
+
+let example_queue = new Queue();
+
+// 次の例文を表示
+async function loadNextExampleText() {
     do {
         // console.log(example_queue);
         exampleText = example_queue.pop();
