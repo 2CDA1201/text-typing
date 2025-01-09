@@ -103,9 +103,12 @@ let example_queue = new Queue();
 // 次の例文を表示
 async function loadNextExampleText() {
     do {
-        // console.log(example_queue);
         exampleText = example_queue.pop();
-    } while (exampleText === "");
+        if (exampleText === null) {
+            await fetchExampleText();
+            exampleText = example_queue.pop();
+        }
+    } while (exampleText === ""); // 空文字列の場合はもう一度取り出す
     input_div.value = "";
     example_div.children[0].textContent = "";
     example_div.children[1].textContent = exampleText;
@@ -123,7 +126,7 @@ async function getExampleText() {
             let result = data;
             let text_arr = result.split('\n');
             for (let i = 0; i < text_arr.length; i++) {
-                example_queue.unshift(text_arr[i]);
+                example_queue.push(text_arr[i]);
             }
         })
         .catch(error => {
