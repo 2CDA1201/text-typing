@@ -40,9 +40,12 @@ const preview_div = document.getElementById("previewDiv");
 const example_div = document.getElementById("exampleDiv");
 const input_div = document.getElementById("inputDiv");
 
+let is_ready_btn_clicked = false; // 準備ボタンがクリックされたかどうかを示すフラグ
 // 準備ボタンがクリックされたときに呼び出される
 ready_btn.addEventListener("click", async () => {
-    ready_btn.clickable = false;
+    if (is_ready_btn_clicked) return;
+    is_ready_btn_clicked = true;
+
     ready_btn.textContent = "準備中...";
     await fetchExampleText();
     
@@ -110,28 +113,25 @@ function assessTypingProgress() {
  * 次の例文を読み込む
  */
 async function loadNextExampleText(is_first = false) {
-    if (example_queue.length <= 2) {
-        await fetchExampleText(2);
-    }
-    if (example_queue.length < STOCK_NUM) {
+    if (example_queue.length < STOCK_NUM / 2) {
         fetchExampleText();
     }
     input_div.value = "";
 
     if (is_first) {
-        exampleText = example_queue.pop();
+        example_text = example_queue.pop();
         example_div.children[0].textContent = "";
-        example_div.children[1].textContent = exampleText;
-        exampleText = example_queue.pop();
+        example_div.children[1].textContent = example_text;
+        example_text = example_queue.pop();
         preview_div.children[0].textContent = "";
-        preview_div.children[1].textContent = exampleText;
+        preview_div.children[1].textContent = example_text;
     } else {
-        exampleText = example_queue.pop();
+        example_text = example_queue.pop();
         example_div.children[0].textContent = "";
         example_div.children[1].textContent = preview_div.children[1].textContent;
 
         preview_div.children[0].textContent = "";
-        preview_div.children[1].textContent = exampleText;
+        preview_div.children[1].textContent = example_text;
     }
 }
 
