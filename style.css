@@ -43,3 +43,7 @@ textarea {
 .entered {
     color: #578e7e;
 }
+
+#exampleDiv {
+    margin-left: 3px;
+}
