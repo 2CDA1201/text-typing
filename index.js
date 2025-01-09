@@ -1,17 +1,32 @@
 /**
- * キューを実装するクラス
+ * キュー構造を配列で実現するクラス
  */
 class Queue {
+    /**
+     * キューを作成する
+     */
     constructor() {
-        this.queue = [];
+        this._queue = [];
     }
 
+    get length() {
+        return this._queue.length;
+    }
+
+    /**
+     * 要素を末尾に追加する
+     * @param {*} element - プッシュする要素
+     */
     push(element) {
-        this.queue.push(element);
+        this._queue.push(element);
     }
 
+    /**
+     * 先頭の要素を取り出す
+     * @returns {*} 先頭の要素を返す／キューが空の場合はnullを返す
+     */
     pop() {
-        if (this.queue.length === 0) {
+        if (this._queue.length === 0) {
             return null;
         }
         return this.queue.shift();
