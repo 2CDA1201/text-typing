@@ -44,7 +44,6 @@ async function generate(count) {
 }
 
 const server = http.createServer(async function (request, response) {
-    console.log(`Request URL: ${request.url}`);
     const parsedUrl = URL.parse(request.url, true);
 
     // /application/generateにGETリクエストが来たら、generate関数を呼び出し、結果を返す

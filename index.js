@@ -33,11 +33,13 @@ class Queue {
     }
 }
 
+// 定数
 const STOCK_NUM = 5;
 const ready_btn = document.getElementById("readyBtn");
 const example_div = document.getElementById("exampleDiv");
 const input_div = document.getElementById("inputDiv");
 
+// 準備ボタンがクリックされたときに呼び出される
 ready_btn.addEventListener("click", async () => {
     ready_btn.clickable = false;
     ready_btn.textContent = "準備中...";
@@ -63,21 +65,25 @@ ready_btn.addEventListener("click", async () => {
     }, 4000);
 });
 
+// 入力された文字列が変更されたときに呼び出される
+input_div.addEventListener("input", assessTypingProgress);
 let is_composing = false; // IME入力が確定されていないかどうかを示すフラグ
-// 変換セッションを開始
+// 日本語IME等の変換セッションが開始された
 input_div.addEventListener('compositionstart', () => {
     is_composing = true;
 });
-
-// 変換セッションを終了
+// 日本語IME等の変換セッションが終了した
 input_div.addEventListener('compositionend', () => {
     is_composing = false;
     assessTypingProgress();
 });
 
+// 例文を格納する変数
 let exampleText = "";
-
-input_div.addEventListener("input", assessTypingProgress);
+let example_queue = new Queue();
+/**
+ * 入力された文字列と例文を比較し、入力状況を表示する
+ */
 function assessTypingProgress() {
     if (is_composing) return; // IME入力が確定されていないときは処理を中断
 
@@ -96,9 +102,6 @@ function assessTypingProgress() {
         example_div.children[1].textContent = exampleText.slice(match_length, exampleText.length);
     }
 };
-
-
-let example_queue = new Queue();
 
 /**
  * 次の例文を読み込む
@@ -128,7 +131,8 @@ async function fetchExampleText() {
         .then(response => response.text())
         .then(data => {
             let result = data;
-            let text_arr = result.split('\n');
+            // 改行で分割して配列に格納
+            let text_arr = result.split('\n').filter(text => text.trim() !== "");
             for (let i = 0; i < text_arr.length; i++) {
                 example_queue.push(text_arr[i]);
             }
