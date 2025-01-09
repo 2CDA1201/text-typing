@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/-Node.js-gray?style=for-the-badge&logo=node.js)
 ![Static Badge](https://img.shields.io/badge/-HTML5-gray?style=for-the-badge&logo=html5)
-![Static Badge](https://img.shields.io/badge/-CSS3-gray?style=for-the-badge&logo=css3&logoColor=blue)
+![Static Badge](https://img.shields.io/badge/-CSS-gray?style=for-the-badge&logo=css&logoColor=blue)
 ![Static Badge](https://img.shields.io/badge/-JavaScript-gray?style=for-the-badge&logo=JavaScript)
 
 ## 使い方
