@@ -34,7 +34,7 @@ class Queue {
 }
 
 // 定数
-const STOCK_NUM = 5;
+const STOCK_NUM = 20; // 例文のストック数
 const ready_btn = document.getElementById("readyBtn");
 const preview_div = document.getElementById("previewDiv");
 const example_div = document.getElementById("exampleDiv");
