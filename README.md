@@ -11,11 +11,13 @@
 
 [Node.js](https://nodejs.org/en/)をインストールする
 
+[Google API Studio](https://aistudio.google.com/app/apikey?hl=ja)より、Gemini APIのAPIキーを作成する
+
 カレントディレクトリが`package.json`のあるフォルダであることを確認し、以下のコマンドで依存関係をインストールする
 
 `npm install`
 
-`.env`ファイルにGemini APIのキーを設定する
+`.env`ファイルにGemini APIのAPIキーを設定する
 
 `API_KEY=IamExampleAPIKey`
 
