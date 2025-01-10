@@ -1,5 +1,8 @@
 /**
- * キュー構造を配列で実現するクラス
+ * @description キュー構造を配列で実現するクラス
+ * @function enqueue - 一つの要素をキューに追加
+ * @function dequeue - 一つの要素をキューから取り出す
+ * @property {number} length - キューの長さ
  */
 class Queue {
     /**
@@ -17,7 +20,7 @@ class Queue {
      * 要素を末尾に追加する
      * @param {*} element - プッシュする要素
      */
-    push(element) {
+    enqueue(element) {
         this._queue.push(element);
     }
 
@@ -25,7 +28,7 @@ class Queue {
      * 先頭の要素を取り出す
      * @returns {*} 先頭の要素を返す／キューが空の場合はnullを返す
      */
-    pop() {
+    dequeue() {
         if (this._queue.length === 0) {
             return null;
         }
@@ -119,14 +122,14 @@ async function loadNextExampleText(is_first = false) {
     input_div.value = "";
 
     if (is_first) {
-        example_text = example_queue.pop();
+        example_text = example_queue.dequeue();
         example_div.children[0].textContent = "";
         example_div.children[1].textContent = example_text;
-        example_text = example_queue.pop();
+        example_text = example_queue.dequeue();
         preview_div.children[0].textContent = "";
         preview_div.children[1].textContent = example_text;
     } else {
-        example_text = example_queue.pop();
+        example_text = example_queue.dequeue();
         example_div.children[0].textContent = "";
         example_div.children[1].textContent = preview_div.children[1].textContent;
 
@@ -146,7 +149,7 @@ async function fetchExampleText(_count = null) {
             // 改行で分割して配列に格納
             let text_arr = result.split('\n').filter(text => text.trim() !== "");
             for (let i = 0; i < text_arr.length; i++) {
-                example_queue.push(text_arr[i]);
+                example_queue.enqueue(text_arr[i]);
             }
         })
         .catch(error => {
