@@ -148,7 +148,6 @@ async function fetchExampleText(_count = null) {
             for (let i = 0; i < text_arr.length; i++) {
                 example_queue.push(text_arr[i]);
             }
-            console.log(example_queue);
         })
         .catch(error => {
             console.error('Error during Fetching:', error);
