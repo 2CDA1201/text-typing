@@ -23,6 +23,10 @@
 
 `node run start`
 
+また、以下のコマンドで開発者モード(`nodemon`)でサーバーを起動する
+
+`node run dev`
+
 ### 動作確認
 
 http://localhost:3000 からアクセス
